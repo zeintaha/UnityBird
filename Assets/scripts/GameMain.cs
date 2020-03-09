@@ -12,17 +12,28 @@ public class GameMain : MonoBehaviour {
 
     private bool gameStarted = false;
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
+
+    public SerialController serialController;
+    string message;
+    int intMessage;
+    int caseSwitch;
+    public float spawnTime;
+
+    // Use this for initialization
+    void Start () {
+        serialController = GameObject.Find("SerialController").GetComponent<SerialController>();
+        
+    }
+
+    // Update is called once per frame
+    void Update () {
         if (!gameStarted && Input.GetButtonDown("Fire1"))
         {
             gameStarted = true;
+           
+            
             StartGame();
+          
         }
     }
 
@@ -38,4 +49,11 @@ public class GameMain : MonoBehaviour {
         scoreMgr.GetComponent<ScoreMgr>().SetScore(0);
         pipeSpawner.GetComponent<PipeSpawner>().StartSpawning();
     }
+
+    public void setSpawnTime(float _spwanTime)
+    {
+        spawnTime = _spwanTime;
+    }
+
+
 }
